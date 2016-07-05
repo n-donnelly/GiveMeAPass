@@ -24,12 +24,14 @@
         android:textStyle="bold"
         android:textColor="#000"
         android:textSize="20sp"
-        android:textIsSelectable="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="172dp"
         android:height="48dp"
-        android:padding="15dp" />
+        android:padding="15dp"
+        android:enabled="true"
+        android:focusableInTouchMode="true"
+        android:focusable="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -41,5 +43,6 @@
         android:layout_marginTop="36dp"
         android:height="48dp"
         android:elegantTextHeight="false"
-        android:padding="15dp" />
+        android:padding="15dp"
+        android:onClick="onPassSubmit" />
 </RelativeLayout>

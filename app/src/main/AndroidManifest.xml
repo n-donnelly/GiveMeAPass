@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Password"
+            android:name=".PasswordActivity"
             android:label="@string/title_activity_password"
             android:parentActivityName=".PassPhraseActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -28,13 +28,13 @@
                 android:value="dev.donnelly.neil.givemeapass.PassPhraseActivity" />
         </activity>
         <activity
-            android:name=".AddService"
+            android:name=".AddServiceDialog"
             android:label="@string/title_activity_add_service"
-            android:parentActivityName=".Password"
+            android:parentActivityName=".PasswordActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.donnelly.neil.givemeapass.Password" />
+                android:value=".PasswordActivity" />
         </activity>
     </application>
 

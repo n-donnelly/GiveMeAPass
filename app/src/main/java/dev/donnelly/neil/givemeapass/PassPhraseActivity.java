@@ -3,17 +3,18 @@ package dev.donnelly.neil.givemeapass;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.EditText;
+
+import java.security.NoSuchAlgorithmException;
 
 public class PassPhraseActivity extends AppCompatActivity {
     public static final String PREFS_NAME = "GiveMeAPassPrefsFile";
+    PassPhraseController ppController = new PassPhraseController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +28,7 @@ public class PassPhraseActivity extends AppCompatActivity {
         String pass_phrase = settings.getString("passphrase","");
 
         if(pass_phrase != ""){
-            Intent intent = new Intent(this, Password.class);
+            Intent intent = new Intent(this, PasswordActivity.class);
             startActivity(intent);
         }
     }
@@ -56,15 +57,26 @@ public class PassPhraseActivity extends AppCompatActivity {
 
     public void onPassSubmit(View view){
         //Restore Preferences
-        TextView tv = (TextView)view.findViewById(R.id.editPassPhrase);
+        EditText tv = (EditText)findViewById(R.id.editPassPhrase);
         String passPhrase = tv.getText().toString();
+        if (passPhrase.equals(""))
+            return;
 
-        SharedPreferences settings = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString("passphrase",passPhrase);
-        String pass_phrase = settings.getString("passphrase","");
+        String hashedPhrase = "";
 
-        Intent intent = new Intent(this, Password.class);
+        try {
+            hashedPhrase = ppController.hashPassPhrase(passPhrase);
+        } catch (NoSuchAlgorithmException e){
+
+        } finally {
+            if (hashedPhrase.equals(""))
+                return;
+            SharedPreferences settings = getPreferences(MODE_PRIVATE);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putString("passphrase",hashedPhrase);
+        }
+
+        Intent intent = new Intent(this, PasswordActivity.class);
         startActivity(intent);
     }
 }

@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="dev.donnelly.neil.givemeapass.AddService"
+    tools:context=".AddServiceDialog"
     tools:showIn="@layout/activity_add_service">
 
     <TextView
@@ -19,7 +19,9 @@
         android:text="Password"
         android:id="@+id/password_label"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#000" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -28,7 +30,8 @@
         android:ems="10"
         android:id="@+id/password_text"
         android:layout_below="@+id/password_label"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:editable="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,9 +39,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Service"
         android:id="@+id/service_label"
-        android:layout_marginTop="36dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:layout_below="@+id/password_text"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/password_text"/>
+        android:layout_marginTop="26dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -47,7 +52,8 @@
         android:ems="10"
         android:id="@+id/service_text"
         android:layout_below="@+id/service_label"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:editable="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,9 +61,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Password Settings"
         android:id="@+id/settings_label"
+        android:layout_marginTop="32dp"
+        android:textColor="#000"
+        android:textStyle="bold"
         android:layout_below="@+id/service_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,9 +73,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Number of Characters"
         android:id="@+id/num_chars_label"
-        android:layout_below="@+id/settings_label"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="26dp" />
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/pass_gen_btn"
+        android:layout_alignStart="@+id/pass_gen_btn"
+        android:textColor="#000" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -77,7 +86,8 @@
         android:id="@+id/num_char_field"
         android:layout_below="@+id/num_chars_label"
         android:layout_centerHorizontal="true"
-        android:width="72dp" />
+        android:width="72dp"
+        android:editable="true" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -85,8 +95,8 @@
         android:text="Special Characters"
         android:id="@+id/incl_spec_check"
         android:layout_below="@+id/num_char_field"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp" />
+        android:layout_alignLeft="@+id/incl_nums_check"
+        android:layout_alignStart="@+id/incl_nums_check" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -101,7 +111,8 @@
         android:layout_height="wrap_content"
         android:text="Generate Password"
         android:id="@+id/pass_gen_btn"
-        android:layout_alignParentBottom="true"
+        android:textStyle="bold"
+        android:layout_below="@+id/incl_nums_check"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
