@@ -5,4 +5,13 @@
     <string name="title_activity_add_service">Add New Service</string>
     <string name="dialog_add_service">Add Service</string>
     <string name="dialog_cancel">Cancel</string>
+    <string name="phrase_prefs_file">PassPhraseGMAPPrefsFile</string>
+    <string name="service_prefs_file">ServiceMapGMAPPrefsFile</string>
+    <string-array name="pass_length_array">
+        <item>8</item>
+        <item>12</item>
+        <item>16</item>
+        <item>20</item>
+        <item>24</item>
+    </string-array>
 </resources>

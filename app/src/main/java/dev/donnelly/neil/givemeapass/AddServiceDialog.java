@@ -8,12 +8,16 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 public class AddServiceDialog extends DialogFragment {
 
     public interface ServiceCreationListener {
-        public void onAddServiceDialogPosClick(DialogFragment dialog);
-        public void onAddServiceDialogNegClick(DialogFragment dialog);
+        public void onAddServiceDialogPosClick(Service service);
     }
 
     ServiceCreationListener mListener;
@@ -42,17 +46,40 @@ public class AddServiceDialog extends DialogFragment {
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        builder.setView(inflater.inflate(R.layout.activity_add_service, null))
+        final View dView =  inflater.inflate(R.layout.content_add_service, null);
+
+        Spinner spinner = (Spinner) dView.findViewById(R.id.num_char_field);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(dView.getContext(),
+                R.array.pass_length_array, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        builder.setView(dView)
                 .setPositiveButton(R.string.dialog_add_service, new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int id){
-                        mListener.onAddServiceDialogPosClick(AddServiceDialog.this);
+
+                        EditText serviceText = (EditText)dView.findViewById(R.id.service_text);
+                        String service = serviceText.getText().toString();
+
+                        Spinner numCharSpin = (Spinner) dView.findViewById(R.id.num_char_field);
+                        int num_char = Integer.parseInt(numCharSpin.getSelectedItem().toString());
+
+                        boolean want_specs = ((CheckBox) dView.findViewById(R.id.incl_spec_check))
+                                .isChecked();
+
+                        boolean want_nums = ((CheckBox) dView.findViewById(R.id.incl_nums_check))
+                                .isChecked();
+
+                        Service ser = new Service(service,num_char,want_specs,want_nums);
+                        mListener.onAddServiceDialogPosClick(ser);
                     }
                 })
                 .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        mListener.onAddServiceDialogNegClick(AddServiceDialog.this);
+                        AddServiceDialog.this.getDialog().cancel();
                     }
                 });
         return builder.create();
