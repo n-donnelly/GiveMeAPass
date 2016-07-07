@@ -18,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 public class PassPhraseActivity extends AppCompatActivity {
     PassPhraseController ppController = new PassPhraseController();
     TextView.OnEditorActionListener enterListener;
+    String pass_phrase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +29,16 @@ public class PassPhraseActivity extends AppCompatActivity {
 
         //Restore Preferences
         SharedPreferences settings = getSharedPreferences(getString(R.string.phrase_prefs_file),0);
-        String pass_phrase = settings.getString("passphrase","");
+        pass_phrase = settings.getString("passphrase","");
 
-        if(pass_phrase != ""){
+        Bundle extras = getIntent().getExtras();
+        boolean wantManualChange = false;
+        if(extras!=null) {
+            wantManualChange = (boolean) extras.get("ManualChange");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        if(pass_phrase != "" && !wantManualChange){
             Intent intent = new Intent(this, PasswordActivity.class);
             intent.putExtra(getString(R.string.phrase_prefs_file),pass_phrase);
             startActivity(intent);
@@ -50,21 +58,15 @@ public class PassPhraseActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_pass_phrase, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+    public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if(id == android.R.id.home){
+            if(pass_phrase == null)
+                return false;
+            Intent intent = new Intent(this, PasswordActivity.class);
+            intent.putExtra(getString(R.string.phrase_prefs_file),pass_phrase);
+            startActivity(intent);
             return true;
         }
 
@@ -91,6 +93,7 @@ public class PassPhraseActivity extends AppCompatActivity {
                     0);
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("passphrase",hashedPhrase);
+            editor.commit();
         }
 
         Intent intent = new Intent(this, PasswordActivity.class);

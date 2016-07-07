@@ -60,5 +60,6 @@ public class HashMapWrapper {
 
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("servicemap",serializedMap);
+        editor.commit();
     }
 }

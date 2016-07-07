@@ -50,9 +50,9 @@ public class AddServiceDialog extends DialogFragment {
 
         Spinner spinner = (Spinner) dView.findViewById(R.id.num_char_field);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(dView.getContext(),
-                R.array.pass_length_array, android.R.layout.simple_spinner_item);
+                R.array.pass_length_array, R.layout.pass_spinner_item);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.pass_spinner_dropdown);
         spinner.setAdapter(adapter);
 
         builder.setView(dView)

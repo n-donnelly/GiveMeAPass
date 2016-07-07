@@ -67,6 +67,7 @@
         android:layout_alignEnd="@+id/service_text"
         android:layout_alignLeft="@+id/service_text"
         android:layout_alignStart="@+id/service_text"
+        android:textAlignment="center"
         android:gravity="center"
         android:spinnerMode="dropdown" />
 

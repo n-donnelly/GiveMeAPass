@@ -21,20 +21,7 @@
         <activity
             android:name=".PasswordActivity"
             android:label="@string/title_activity_password"
-            android:parentActivityName=".PassPhraseActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.donnelly.neil.givemeapass.PassPhraseActivity" />
-        </activity>
-        <activity
-            android:name=".AddServiceDialog"
-            android:label="@string/title_activity_add_service"
-            android:parentActivityName=".PasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PasswordActivity" />
         </activity>
     </application>
 
